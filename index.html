@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <title>Rosemount Technology Center</title>
+    <!-- load all resources -->
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.fullPage.js"></script>
+    <!-- H5 Object to oragnize the whole page content -->
+    <script type="text/javascript" src="js/H5.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/H5.css" >
+    <!-- page logical style -->
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .h5_page{
+            background-image: url(imgs/bg.jpg);
+            background-size: cover;
+        }
+        .h5_page_face{
+        	background:#003366;
+        }
+        @-webkit-keyframes rock{
+            0%{ transform:rotate(0deg)}
+            5%{ transform:rotate(3deg)}
+            10%{ transform:rotate(-4deg)}
+            15%{ transform:rotate(3deg)}
+            20%{ transform:rotate(-2deg)}
+            25%{ transform:rotate(1deg)}
+            30%{ transform:rotate(-1deg)}
+            70%{ transform:rotate(0deg)}
+            100%{ transform:rotate(0deg)}
+        }
+        @keyframes rock{
+            0%{ transform:rotate(0deg)}
+            5%{ transform:rotate(3deg)}
+            10%{ transform:rotate(-4deg)}
+            15%{ transform:rotate(3deg)}
+            20%{ transform:rotate(-2deg)}
+            25%{ transform:rotate(1deg)}
+            30%{ transform:rotate(-1deg)}
+            70%{ transform:rotate(0deg)}
+            100%{ transform:rotate(0deg)}
+        }
+        .h5_component_name_caption{
+            background-image: url(imgs/page_caption_bg.png);
+            width: 283px;
+            height: 160px;
+            text-align: center;
+            text-indent: 20px;
+            line-height: 140px;
+            font-size: 20px;
+            color: #fff;
+        }
+        .h5_component_name_back{
+            top: 30px;
+            -webkit-animation:back 2s infinite 2s;
+            animation:back 2s infinite 2s;
+        }
+        @-webkit-keyframes back{
+            50%{ top: 20px; }
+        }
+        @keyframes back{
+            50%{ top: 20px; }
+        }
+    </style>
+ </head>   
+    <body>
+    <!-- Load all H5 component resources -->
+    <script type="text/javascript">
+        var res = [
+            'Base','Bar','Point','Polyline',
+            'Radar'
+            ];
+        var html = [];
+        for(s in res){
+            html.push('<script type="text/javascript" src="js/H5Component'+res[s]+'.js"><\/script>');
+            html.push('<link rel="stylesheet" type="text/css" href="css/H5Component'+res[s]+'.css">');
+        }
+        document.write( html.join('') );
+    </script>
+    <!-- main logic -->
+    <script type="text/javascript">
+        $(function  () {
+            var h5 = new H5();
+            h5.whenAddPage = function(){
+                this.addComponent('slide_up',{
+                    bg:'imgs/emsblogo.png',
+                    
+                    css:{
+                        opacity:0,
+                        left:0,bottom:-20,
+                        width:'100%',height:'30px',zIndex:999,
+                        backgroundColor:'#830202',backgroundSize:'contain',backgroundPosition:'center'
+                    },
+                    animateIn:{
+                        opacity:1,bottom:'-1px'
+                    },
+                    animateOut:{
+                        opacity:0,bottom:'-20px'
+                    },
+                    delay:500
+                });
+            }
+
+            h5
+            .addPage('face')
+                .addComponent('logo',{
+                    center:true,
+                    width:516,
+                    height:150,
+                    bg:'imgs/RTC-LOGO1.png',
+                    css:{opacity:0},
+                    animateIn:{top:60,opacity:1},
+                    animateOut:{top:0,opacity:0},
+                })
+                .addComponent('slogan',{
+                    center:true,
+                    width:365,
+                    height:99,
+                    bg:'imgs/emsblogo.png',
+                    css:{opacity:0,top:140},
+                    animateIn:{left:'50%',opacity:1},
+                    animateOut:{left:'0%',opacity:0},
+                    delay:500
+                })
+                .addComponent('hallway',{
+                    center:true,
+                    width:1000,
+                    height:250,
+                    bg:'imgs/hallway.jpg',
+                    css:{opacity:0,top:180},
+                    animateIn:{opacity:1},
+                    animateOut:{opacity:0},
+                    delay:1000
+                })
+                .addComponent('intro_pic',{
+                    bg:'imgs/firstpage.png',
+                    css:{opacity:0,bottom:-50,width:'100%',height:'200px'},
+                    animateIn:{opacity:1,bottom:40},
+                    animateOut:{opacity:0,bottom:-50},
+                    delay:1000
+                })
+            .addPage()
+                .addComponent('caption',{text:'Brief'})
+                .addComponent('text',{
+                    width:500,
+                    height:30,
+                    center:true,
+                    text:'Value Your Career!',
+                    css:{
+                        opacity:0,textAlign:'center',color:'#830202',fontSize:'26px',fontFamily:'fantasy'
+                    },
+                    animateIn:{opacity:1,top:120},
+                    animateOut:{opacity:0,top:240},
+                })
+                .addComponent('description',{
+                    width:480,
+                    height:295,
+                    bg:'imgs/description_bg2.png',
+                    css:{
+                        opacity:0,
+                        padding:'15px 10px 10px 10px',
+                        color:'#fff',
+                        fontSize:'14px',
+                        lineHeight:'17px',
+                        textAlign:'justify',
+                        marginLeft:-130,
+                        left:'50%',
+                        top:100
+                    },
+                    text:'Rosemount Technology Centre is one of the largest English technical career training centres in Quebec. RTC is a modern facility with up-to-date technological equipment and comprehensive student services.',
+                    animateIn:{opacity:1,top:180},
+                    animateOut:{opacity:0,top:240},
+                    delay:1000
+                })
+                .addComponent('intro',{
+                    center:true,
+                    width:560,
+                    height:350,
+                    bg:'imgs/cnc.png',
+                    css:{
+                        opacity:0,
+                        bottom:0
+                    },
+                    animateIn:{opacity:1,bottom:40},
+                    animateOut:{opacity:0,bottom:0},
+                    delay:500
+                })
+            
+            .addPage()
+                .addComponent('caption',{text:'Diverse Programs '})//bar
+                .addComponent('bar',{
+                    type:'bar',
+					width:530,
+					height:600,
+					data:[
+						['Computer Graphic', 300 , '#830202'],
+						['Industrial Draft', 150 , '#bdbaba'],
+						['Machining Technique', 120 , '#bdbaba'],
+						['Welding Process', 80 , '#bdbaba'],
+						['Cabinet Making', 70 , '#bdbaba'],
+						['Digital Printing', 40 , '#bdbaba']
+					],
+					css:{
+						bottom:0,
+						opacity:0,
+						fontSize:'14px'
+					},
+					animateIn:{bottom:80,opacity:1},
+					animateOut:{bottom:0,opacity:0},
+					center:true
+                })
+                .addComponent('msg',{
+                    text:'Graduate quantity every year of each program in the last 5 years',
+                    css:{
+                        opacity:0,top:110,
+                        color:'#003366'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+            .addPage()
+                .addComponent('caption',{text:'World Wide Students'})//point
+                .addComponent('msg',{
+                    text:'We recruite the students from world wide. Chinese students account for more than 20%.',
+                    css:{
+                        opacity:0,top:110,
+                        color:'#003366'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+
+                .addComponent('point',{
+                    type:'point',
+				width:80,
+				height:80,
+				data:[
+					['Canada', .4 , 'red','-80%','100%'],
+					['USA', .32 , '#8fd7ef','-20%','-100%'],
+					['China', .5 , 'pink','120%','200%'],
+					['India', .4 , '#e28e8e','180%','-120%'],
+					['Mexico', .3 , '#a4e6a4','-190%','-130%'],
+					['Other', .3 , '#bdbaba','-180%','320%']
+				],
+				css:{
+					bottom:0,
+					opacity:1,
+					left:'40%'
+				},
+				animateIn:{bottom:220,opacity:1},
+				animateOut:{bottom:0,opacity:0},
+                })
+
+          	.addPage()
+                .addComponent('caption',{text:'Employment Rate'})//polyline
+                .addComponent('msg',{
+                    text:'The employment rate distribution in the last 6 years:',
+                    css:{
+                        opacity:0,top:110,
+                        color:'#003366'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+                .addComponent('polyline',{
+                type:'polyline',
+			width:530,
+			height:400,
+			data:[
+				['2010', 0.70 , '#efbd94'],
+				['2011', 0.82 , '#efbd94'],
+				['2012', 0.65 , '#pink'],
+				['2013', 0.90 , '#e28e8e'],
+				['2014', 0.75 , '#a4e6a4'],
+				['2015', 0.95 , '#bdbaba']
+			],
+			css:{
+				bottom:50,
+				opacity:0,
+			},
+			animateIn:{bottom:120,opacity:1},
+			animateOut:{bottom:0,opacity:0},
+			center:true
+            })
+             //salary statistics   
+            .addPage()
+                .addComponent('caption',{text:'Salary Statistics '})//bar
+                .addComponent('bar',{
+                    type:'bar',
+					width:600,
+					height:500,
+					data:[
+						['Industrial Draft', 18 , '#830202'],
+						['Computer Graphic', 12 , '#bdbaba'],
+						['Machining Technique', 16 , '#bdbaba'],
+						['Welding Process', 17 , '#bdbaba'],
+						['Cabinet Making', 16 , '#bdbaba'],
+						['Digital Printing', 15 , '#bdbaba']
+					],
+					css:{
+						bottom:0,
+						opacity:0,
+						fontSize:'14px',
+						transform:'translateX(-50%)',
+						left:'55%',
+						width:'85%',
+						height:'45%'
+					},
+					animateIn:{bottom:100,opacity:1},
+					animateOut:{bottom:0,opacity:0},
+                })
+                .addComponent('msg',{
+                    text:'Average salary(CAD/hour) of graduate from each program in the last 5 years. Industrial Draft has the most income result.',
+                    css:{
+                        opacity:0,top:110,
+                        color:'#003366'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })    
+            //Registration Conditioin
+            .addPage()
+            	.addComponent('caption',{text:'Registration Conditioin '})//radar
+                .addComponent('radar',{
+                    type:'radar',
+					width:400,
+					height:400,
+				data:[
+					['English Skill', .8 , '#efbd94'],
+					['French Skill', .5 , '#8fd7ef'],
+					['Age', .6 , 'pink'],
+					['Transcript', .9 , '#e28e8e'],
+					['Economic Ability', .2 , '#a4e6a4'],
+				],
+				css:{
+					bottom:0,
+					opacity:0,
+					fontSize:'12px'
+				},
+				animateIn:{bottom:110,opacity:1},
+				animateOut:{bottom:0,opacity:0},
+				center:true
+                })
+                .addComponent('msg',{
+                    text:'The students who have the better exam result in high school, whose age is between 18 and 30, who have better English and French skill are welcome.',
+                    css:{
+                        opacity:0,top:110,
+                        color:'#003366'
+                    },
+                    animateIn:{ opacity:1},
+                    animateOut:{ opacity:0}
+                })
+            //last page   
+            .addPage('tail')
+                .addComponent('logo',{
+                    center:true,
+                    width:359,
+                    height:129,
+                    bg:'imgs/RTC-LOGO1.png',
+                    css:{top:240,opacity:0},
+                    animateIn:{opacity:1,top:210},
+                    animateOut:{opacity:0,top:240},
+                })
+                .addComponent('slogan',{
+                    center:true,
+                    width:400,
+                    height:400,
+                    bg:'imgs/join-us.png',
+                    css:{top:320,opacity:0},
+                    animateIn:{opacity:1,left:'50%'},
+                    animateOut:{opacity:0,left:'0%'},
+                    delay:500,
+                })
+                .addComponent('back',{
+                	center:true,
+                	width:52,
+                	height:50,
+                	bg:'imgs/tail_back.png',
+                	css:{opacity:1,top:30},
+                	onclick:function(){
+                		$.fn.fullpage.moveTo(1);
+                	}
+                })
+                
+
+            .loader( 1 );
+//          .loader( [ 'imgs/tail_back.png','imgs/tail_share.png','imgs/tail_slogan.png' ] );
+
+        });
+    </script>
+
+    </body>
+
+</html>
